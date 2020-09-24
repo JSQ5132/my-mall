@@ -3,7 +3,9 @@ package com.example.mymall.tiny.dao;
 
 
 import com.example.mymall.tiny.mbg.model.UmsPermission;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
