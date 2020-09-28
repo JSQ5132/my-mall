@@ -92,17 +92,31 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticationEntryPoint(restAuthenticationEntryPoint);
     }
 
+    /**
+     * 用于配置UserDetailsService及PasswordEncoder；
+     * @param auth AuthenticationManagerBuilder
+     * @throws Exception
+     */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService())
                 .passwordEncoder(passwordEncoder());
     }
 
+    /**
+     * SpringSecurity定义的用于对密码进行编码及比对的接口，目前使用的是BCryptPasswordEncoder；
+     * @return
+     */
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+
+    /**
+     * SpringSecurity定义的核心接口，用于根据用户名获取用户信息，需要自行实现；
+     * @return
+     */
     @Bean
     public UserDetailsService userDetailsService() {
         //获取登录用户信息
@@ -117,6 +131,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         };
     }
 
+    /**
+     * 在用户名和密码校验前添加的过滤器，如果有jwt的token，会自行根据token信息进行登录。
+     * @return
+     */
     @Bean
     public JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter(){
         return new JwtAuthenticationTokenFilter();

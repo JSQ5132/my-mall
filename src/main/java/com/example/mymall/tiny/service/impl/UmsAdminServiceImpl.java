@@ -2,11 +2,10 @@ package com.example.mymall.tiny.service.impl;
 
 
 import com.example.mymall.tiny.common.utils.JwtTokenUtil;
-import com.example.mymall.tiny.dao.UmsAdminRoleRelationDao;
+
 import com.example.mymall.tiny.mbg.mapper.UmsAdminMapper;
 import com.example.mymall.tiny.mbg.model.UmsAdmin;
 import com.example.mymall.tiny.mbg.model.UmsAdminExample;
-import com.example.mymall.tiny.mbg.model.UmsPermission;
 import com.example.mymall.tiny.service.UmsAdminService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,12 +31,19 @@ import java.util.List;
 @Service
 public class UmsAdminServiceImpl implements UmsAdminService {
     private static final Logger LOGGER = LoggerFactory.getLogger(UmsAdminServiceImpl.class);
+    /**
+     * 该接口由spring security 提供
+     */
     @Autowired
     private UserDetailsService userDetailsService;
-    @Autowired
-    private JwtTokenUtil jwtTokenUtil;
+
+    /**
+     * 该接口由spring security 提供
+     */
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private JwtTokenUtil jwtTokenUtil;
     @Value("${jwt.tokenHead}")
     private String tokenHead;
     @Autowired
